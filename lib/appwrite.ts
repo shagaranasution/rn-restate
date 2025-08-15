@@ -55,6 +55,7 @@ export async function login(): Promise<boolean> {
 }
 
 export async function logout(): Promise<boolean> {
+  console.log('call logout');
   try {
     await account.deleteSession('current');
     return true;
