@@ -43,7 +43,7 @@ export async function login(): Promise<boolean> {
 
     if (!secret || !userId) throw new Error('Failed to create OAuth2 Token');
 
-    const session = account.createSession(userId, secret);
+    const session = await account.createSession(userId, secret);
 
     if (!session) throw new Error('Failed to create session');
 
@@ -55,7 +55,6 @@ export async function login(): Promise<boolean> {
 }
 
 export async function logout(): Promise<boolean> {
-  console.log('call logout');
   try {
     await account.deleteSession('current');
     return true;

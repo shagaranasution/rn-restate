@@ -1,11 +1,20 @@
+import { logout } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/global-context';
 import { Link, Redirect } from 'expo-router';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function Index() {
-  const { user } = useGlobalContext();
+  const { user, refetch } = useGlobalContext();
 
   if (!user) return <Redirect href={'/sign-in'} />;
+
+  const handleLogout = async () => {
+    const result = await logout();
+
+    if (result) {
+      await refetch();
+    }
+  };
 
   return (
     <View
@@ -18,6 +27,10 @@ export default function Index() {
       <Link href={'/explore'}>Explore</Link>
       <Link href={'/profile'}>Profile</Link>
       <Link href={'/properties/1'}>Property</Link>
+
+      <TouchableOpacity onPress={handleLogout} className="text-black">
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
