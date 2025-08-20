@@ -1,12 +1,10 @@
 import { logout } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/global-context';
-import { Link, Redirect } from 'expo-router';
+import { Link } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function Index() {
-  const { user, refetch } = useGlobalContext();
-
-  if (!user) return <Redirect href={'/sign-in'} />;
+  const { refetch } = useGlobalContext();
 
   const handleLogout = async () => {
     const result = await logout();

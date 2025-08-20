@@ -70,11 +70,11 @@ export async function getCurrentUser() {
 
     if (!result.$id) return null;
 
-    const userAvatar = avatar.getInitials(result.name);
+    const userAvatar = avatar.getInitialsURL(result.name).toString();
 
     return {
       ...result,
-      avatar: userAvatar.toString(),
+      avatar: userAvatar,
     };
   } catch (error) {
     console.error(error);
